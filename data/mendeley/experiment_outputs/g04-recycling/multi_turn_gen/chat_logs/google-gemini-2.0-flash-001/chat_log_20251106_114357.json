@@ -1,0 +1,618 @@
+{
+  "model": "google/gemini-2.0-flash-001",
+  "system_prompt": "You are a QA Engineer. For each user story I give you, please generate a complete Gherkin feature file with 3-5 realistic, testable scenarios. Please return the Gherkin only, without comments or explanation.",
+  "conversation_turns": [
+    {
+      "user": {
+        "content": "User story: As a user, I want to click on the address, so that it takes me to a new tab with Google Maps.",
+        "us_id": "g04-recycling_1"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Address Redirection to Google Maps\n\n  Scenario: Clicking on the address opens Google Maps in a new tab\n    Given I am on the website\n    When I click on the address\n    Then a new tab should open\n    And the new tab's URL should start with \"https://www.google.com/maps\"\n    And the new tab should contain the address I clicked on\n\n  Scenario: Address contains street, city, state, and zip code\n    Given I am on the website\n    When I click on the address\n    Then a new tab should open with Google Maps\n    And the Google Maps search query should include the street, city, state, and zip code displayed on the website\n\n  Scenario: Clicking on the address with special characters opens Google Maps with correct encoding\n    Given I am on the website\n    And the website displays an address with special characters like \"Apt #1, 123 Main St\"\n    When I click on the address\n    Then a new tab should open with Google Maps\n    And the Google Maps search query should correctly encode the special characters\n\n  Scenario: Address link is present on multiple locations on the page\n    Given I am on the website\n    And the address is displayed in multiple locations on the page\n    When I click on any address link\n    Then a new tab should open with Google Maps\n    And the new tab should display a map centered on the clicked address\n```",
+        "created": 1762429290,
+        "prompt_tokens": 73,
+        "completion_tokens": 307
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to anonymously view public information, so that I know about recycling centers near me before creating an account.",
+        "us_id": "g04-recycling_2"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Anonymous Access to Recycling Center Information\n\n  Scenario: View recycling centers without logging in\n    Given I am on the recycling center website\n    When I am not logged in\n    Then I should be able to see a list of recycling centers\n    And I should be able to view details of each recycling center\n\n  Scenario: Access recycling center details page anonymously\n    Given I am on the recycling center website\n    And I am not logged in\n    When I click on a recycling center's name\n    Then I should be redirected to the recycling center's details page\n    And the details page should display the recycling center's address, hours, and accepted materials\n\n  Scenario: Search for recycling centers by location anonymously\n    Given I am on the recycling center website\n    And I am not logged in\n    When I enter my location in the search field\n    And I click the \"Search\" button\n    Then I should see a list of recycling centers near my location\n    And each result should display the distance from my location\n\n  Scenario: View map of recycling centers anonymously\n    Given I am on the recycling center website\n    And I am not logged in\n    When I click on the \"Map\" view\n    Then I should see a map displaying recycling centers\n    And each recycling center should be marked with a pin\n    And I should be able to click on a pin to view the recycling center's name and address\n```",
+        "created": 1762429292,
+        "prompt_tokens": 412,
+        "completion_tokens": 305
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to enter my zip code and get a list of nearby recycling facilities, so that I can determine which ones I should consider.",
+        "us_id": "g04-recycling_3"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Find Nearby Recycling Facilities by Zip Code\n\n  Scenario: Search for recycling facilities using a valid zip code\n    Given I am on the recycling facility search page\n    When I enter a valid zip code \"90210\"\n    And I click the \"Search\" button\n    Then I should see a list of recycling facilities near \"90210\"\n    And each facility should display its name, address, and distance from the zip code\n\n  Scenario: Search for recycling facilities using an invalid zip code\n    Given I am on the recycling facility search page\n    When I enter an invalid zip code \"123\"\n    And I click the \"Search\" button\n    Then I should see an error message indicating the zip code is invalid\n    And the search results list should be empty\n\n  Scenario: No recycling facilities found for a valid zip code\n    Given I am on the recycling facility search page\n    When I enter a valid zip code \"99999\" where no facilities exist\n    And I click the \"Search\" button\n    Then I should see a message indicating no recycling facilities were found near \"99999\"\n\n  Scenario: Search with a zip code and filter by material type\n    Given I am on the recycling facility search page\n    When I enter a valid zip code \"10001\"\n    And I select \"Plastic\" as the material type\n    And I click the \"Search\" button\n    Then I should see a list of recycling facilities near \"10001\" that accept \"Plastic\"\n    And the material types accepted by each facility should be displayed\n```",
+        "created": 1762429295,
+        "prompt_tokens": 754,
+        "completion_tokens": 351
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to get the hours of each recycling facility, so that I can arrange drop-offs on my off days or during after-work hours.",
+        "us_id": "g04-recycling_4"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Display Recycling Facility Hours\n\n  Scenario: View operating hours on the recycling facility details page\n    Given I am viewing the details page for \"EcoRecycle Center\"\n    Then I should see the operating hours for each day of the week\n    And the operating hours should be displayed in a clear and readable format\n\n  Scenario: Verify different hour formats are displayed correctly\n    Given I am viewing the details page for \"Green Solutions\"\n    And the facility has varying hours: \"Mon-Fri: 9:00 AM - 5:00 PM, Sat: 10:00 AM - 2:00 PM, Sun: Closed\"\n    Then I should see the correct operating hours for each day\n    And the display should handle closed days appropriately\n\n  Scenario: Handle facilities with 24-hour access\n    Given I am viewing the details page for \"All-Night Recycling\"\n    And the facility is open 24 hours\n    Then I should see \"Open 24 Hours\" displayed for all days of the week\n\n  Scenario: Handle facilities with temporarily changed hours\n    Given I am viewing the details page for \"Community Recycling\"\n    And the facility has a temporary hours change: \"Closed for Maintenance: Oct 26 - Oct 28\"\n    Then I should see a notice about the temporary closure\n    And the regular operating hours should be displayed for other dates\n```",
+        "created": 1762429297,
+        "prompt_tokens": 1145,
+        "completion_tokens": 302
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to have a flexible pick up time, so that I can more conveniently use the website.",
+        "us_id": "g04-recycling_5"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Flexible Pickup Time Selection\n\n  Scenario: Select a pickup time within a specified range\n    Given I am scheduling a pickup\n    When I select a date for pickup\n    Then I should be able to choose a pickup time from a dropdown list\n    And the dropdown list should offer time slots with at least 1-hour flexibility\n    And the selected time slot should be displayed on the confirmation screen\n\n  Scenario: Request a specific pickup time outside of available slots\n    Given I am scheduling a pickup\n    When I select a date for pickup\n    And I try to request a specific pickup time outside of the available slots (e.g., by typing in a specific time)\n    Then I should receive an error message indicating the requested time is not available\n    And I should be prompted to select a time from the available slots\n\n  Scenario: Pickup time availability is updated based on date and location\n    Given I am scheduling a pickup\n    When I select a different date\n    Then the available pickup time slots should update based on the selected date\n    And when I select a different location\n    Then the available pickup time slots should update based on the selected location\n    And the system should prevent double-booking of pickup slots\n\n  Scenario: Verify pickup time slots are displayed in a user-friendly format\n    Given I am scheduling a pickup\n    When I select a date for pickup\n    Then the available pickup time slots should be displayed in a clear and understandable format (e.g., \"9:00 AM - 12:00 PM\", \"1:00 PM - 4:00 PM\")\n    And each time slot should display the start and end time\n```",
+        "created": 1762429300,
+        "prompt_tokens": 1474,
+        "completion_tokens": 357
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to select different types of recyclable waste, so I have and get a list of facilities that accept each type and their opening hours, so that I can find an optimal route and schedule.",
+        "us_id": "g04-recycling_6"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Selectable Waste Types and Facility Information\n\n  Scenario: Select multiple recyclable waste types and view matching facilities\n    Given I am on the recycling facility search page\n    When I select \"Plastic\" and \"Glass\" as recyclable waste types\n    And I enter my zip code \"10002\"\n    And I click \"Search\"\n    Then I should see a list of recycling facilities near \"10002\" that accept both \"Plastic\" and \"Glass\"\n    And each facility listing should display the accepted waste types and their opening hours\n\n  Scenario: No facilities found for selected waste types and location\n    Given I am on the recycling facility search page\n    When I select \"Hazardous Waste\" as the recyclable waste type\n    And I enter my zip code \"90210\"\n    And I click \"Search\"\n    Then I should see a message indicating no facilities were found that accept \"Hazardous Waste\" near \"90210\"\n\n  Scenario: Facility details include all accepted waste types and detailed hours\n    Given I am on the details page for \"Eco-Friendly Recycling Center\"\n    Then the page should list all recyclable waste types accepted by the facility (e.g., \"Plastic\", \"Glass\", \"Paper\", \"Metal\")\n    And the page should display detailed opening hours for each day of the week\n\n  Scenario: Search for specialized waste types and view specific facility instructions\n    Given I am on the recycling facility search page\n    When I select \"Electronics\" as the recyclable waste type\n    And I enter my zip code \"60606\"\n    And I click \"Search\"\n    Then I should see a list of recycling facilities near \"60606\" that accept \"Electronics\"\n    And each facility listing should include any specific instructions for electronics recycling (e.g., \"Remove batteries\", \"No CRT monitors\")\n```",
+        "created": 1762429303,
+        "prompt_tokens": 1880,
+        "completion_tokens": 404
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to add donation centers as favorites on my profile, so that I can view them later.",
+        "us_id": "g04-recycling_7"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Adding Donation Centers as Favorites\n\n  Scenario: Adding a donation center to favorites\n    Given I am logged in as a registered user\n    And I am viewing the details page of a donation center\n    When I click the \"Add to Favorites\" button\n    Then the donation center should be added to my favorites list\n    And the \"Add to Favorites\" button should change to \"Remove from Favorites\"\n\n  Scenario: Removing a donation center from favorites\n    Given I am logged in as a registered user\n    And I am viewing the details page of a donation center that is already in my favorites\n    When I click the \"Remove from Favorites\" button\n    Then the donation center should be removed from my favorites list\n    And the \"Remove from Favorites\" button should change to \"Add to Favorites\"\n\n  Scenario: Viewing the list of favorite donation centers\n    Given I am logged in as a registered user\n    When I navigate to my profile page\n    Then I should see a section labeled \"Favorite Donation Centers\"\n    And the section should list all donation centers I have added to my favorites\n\n  Scenario: Favoriting a donation center requires login\n    Given I am not logged in\n    And I am viewing the details page of a donation center\n    When I click the \"Add to Favorites\" button\n    Then I should be redirected to the login page\n    And after logging in, I should be redirected back to the donation center details page\n    And the donation center should be added to my favorites if I click \"Add to Favorites\" again\n```",
+        "created": 1762429306,
+        "prompt_tokens": 2310,
+        "completion_tokens": 328
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to give my email ID, so that I can receive notifications for new events as they are posted.",
+        "us_id": "g04-recycling_8"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Email Notifications for New Events\n\n  Scenario: Subscribing to email notifications with a valid email address\n    Given I am on the event notification subscription page\n    When I enter a valid email address \"test@example.com\" in the email field\n    And I click the \"Subscribe\" button\n    Then I should receive a confirmation message indicating successful subscription\n    And my email address \"test@example.com\" should be added to the notification list\n\n  Scenario: Subscribing to email notifications with an invalid email address\n    Given I am on the event notification subscription page\n    When I enter an invalid email address \"invalid-email\" in the email field\n    And I click the \"Subscribe\" button\n    Then I should see an error message indicating the email address is invalid\n    And I should be prompted to enter a valid email address\n\n  Scenario: Unsubscribing from email notifications\n    Given I am subscribed to email notifications with the email address \"test@example.com\"\n    When I click the \"Unsubscribe\" link in a notification email\n    Then I should be redirected to a confirmation page\n    And I should see a message confirming my unsubscription\n    And my email address \"test@example.com\" should be removed from the notification list\n\n  Scenario: Receiving email notifications for new events\n    Given I am subscribed to email notifications with the email address \"test@example.com\"\n    When a new event is posted on the website\n    Then I should receive an email notification about the new event\n    And the email should contain the event title, description, and a link to the event details page\n```",
+        "created": 1762429308,
+        "prompt_tokens": 2670,
+        "completion_tokens": 346
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to view a map display of the public recycling bins around my area.",
+        "us_id": "g04-recycling_9"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Map Display of Public Recycling Bins\n\n  Scenario: Viewing recycling bins on a map with default location\n    Given I am on the recycling bin map page\n    Then I should see a map centered on my default location (e.g., city center or detected location)\n    And the map should display markers indicating the location of public recycling bins\n    And each marker should be clearly visible and distinguishable\n\n  Scenario: Searching for recycling bins by address and viewing the map\n    Given I am on the recycling bin map page\n    When I enter an address \"1600 Amphitheatre Parkway, Mountain View, CA\" in the search bar\n    And I click the \"Search\" button\n    Then the map should update to center on the searched address\n    And the map should display markers indicating the location of public recycling bins near the searched address\n\n  Scenario: Clicking a map marker displays bin details\n    Given I am on the recycling bin map page\n    And the map displays a marker for a recycling bin\n    When I click on the recycling bin marker\n    Then a popup window should appear displaying the bin's address\n    And the popup window should display the types of materials accepted by the bin\n\n  Scenario: Zooming and panning the map updates the displayed recycling bins\n    Given I am on the recycling bin map page\n    And the map is centered on a specific location\n    When I zoom in on the map\n    Then the map should display more recycling bins in the zoomed-in area\n    When I pan the map to a different area\n    Then the map should display recycling bins in the new area\n```",
+        "created": 1762429312,
+        "prompt_tokens": 3042,
+        "completion_tokens": 340
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to view a map display of the special waste drop off sites around my area.",
+        "us_id": "g04-recycling_10"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Map Display of Special Waste Drop-off Sites\n\n  Scenario: View special waste drop-off sites on a map centered on my location\n    Given I am on the special waste drop-off map page\n    Then I should see a map centered on my current location (or default location)\n    And the map should display markers indicating the location of special waste drop-off sites\n    And each marker should be visually distinct from regular recycling bins\n\n  Scenario: Search for special waste drop-off sites by address and update map\n    Given I am on the special waste drop-off map page\n    When I enter an address \"123 Main Street, Anytown, USA\" in the search field\n    And I click the \"Search\" button\n    Then the map should re-center on the entered address\n    And the map should display markers for special waste drop-off sites near the entered address\n\n  Scenario: Clicking a special waste drop-off marker displays site details\n    Given I am on the special waste drop-off map page\n    And the map displays a marker for a special waste drop-off site\n    When I click on the marker\n    Then a popup should appear displaying the site's name and address\n    And the popup should list the types of special waste accepted (e.g., electronics, batteries, paint)\n    And the popup should display the site's operating hours\n\n  Scenario: Zooming and panning updates the display of special waste drop-off sites\n    Given I am on the special waste drop-off map page\n    When I zoom in on the map\n    Then the map should display more special waste drop-off sites if available in the zoomed-in area\n    When I pan the map to a different region\n    Then the map should update to show special waste drop-off sites in that region\n```",
+        "created": 1762429314,
+        "prompt_tokens": 3410,
+        "completion_tokens": 391
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to view the safe disposal events currently being organised around my area.",
+        "us_id": "g04-recycling_11"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: View Safe Disposal Events\n\n  Scenario: Display a list of upcoming safe disposal events in my area\n    Given I am on the safe disposal events page\n    When the page loads\n    Then I should see a list of upcoming safe disposal events\n    And each event listing should display the event name, date, time, and location\n\n  Scenario: Filter events by location\n    Given I am on the safe disposal events page\n    When I enter my city \"Los Angeles\" in the location filter\n    And I click the \"Apply Filter\" button\n    Then I should see a list of safe disposal events in Los Angeles\n\n  Scenario: Event details include accepted items and contact information\n    Given I am viewing the details page for the \"Community E-Waste Recycling Day\" event\n    Then I should see a list of accepted items (e.g., computers, monitors, printers)\n    And I should see contact information for the event organizer (e.g., phone number, email address)\n\n  Scenario: No events found for a specific location\n    Given I am on the safe disposal events page\n    When I enter a remote location \"Nowhereville\" in the location filter\n    And I click the \"Apply Filter\" button\n    Then I should see a message indicating that no events were found for that location\n```",
+        "created": 1762429317,
+        "prompt_tokens": 3826,
+        "completion_tokens": 278
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to choose a flexible pick up time, so that I can more conveniently use the website.",
+        "us_id": "g04-recycling_12"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Flexible Pickup Time Selection for Waste Disposal\n\n  Scenario: Select a pickup time from available time slots\n    Given I am scheduling a waste pickup\n    When I select a date for the pickup\n    Then I should see a list of available pickup time slots\n    And I should be able to select a time slot that suits my schedule\n    And the selected time slot should be displayed on the confirmation page\n\n  Scenario: View available time slots for different dates\n    Given I am scheduling a waste pickup\n    When I change the pickup date\n    Then the available pickup time slots should update to reflect availability for the new date\n\n  Scenario: Request a specific time outside of the available slots and receive feedback\n    Given I am scheduling a waste pickup\n    When I try to enter a specific pickup time that is not within the available slots\n    Then I should receive an error message indicating that the time is not available\n    And I should be prompted to select a time from the available slots\n\n  Scenario: Time slot availability is based on location\n    Given I am scheduling a waste pickup\n    When I change the pickup address\n    Then the available pickup time slots should update to reflect availability for the new location\n```",
+        "created": 1762429320,
+        "prompt_tokens": 4131,
+        "completion_tokens": 253
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to view user documentation for the website, so that I know how to use the web app.",
+        "us_id": "g04-recycling_13"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: User Documentation Access\n\n  Scenario: Accessing the user documentation from the main navigation\n    Given I am on any page of the website\n    When I click on the \"Help\" or \"Documentation\" link in the main navigation\n    Then I should be redirected to the user documentation page\n\n  Scenario: Viewing the table of contents for the user documentation\n    Given I am on the user documentation page\n    Then I should see a table of contents listing the available documentation sections\n    And each section in the table of contents should be a clickable link\n\n  Scenario: Navigating to a specific documentation section\n    Given I am on the user documentation page\n    When I click on a link in the table of contents, for example \"Scheduling a Pickup\"\n    Then I should be redirected to the \"Scheduling a Pickup\" documentation section\n    And the content of the \"Scheduling a Pickup\" section should be displayed\n\n  Scenario: Searching the user documentation for a specific term\n    Given I am on the user documentation page\n    When I enter \"zip code\" in the search field\n    And I click the \"Search\" button\n    Then I should see a list of search results related to \"zip code\"\n    And each search result should link to the relevant documentation section\n```",
+        "created": 1762429322,
+        "prompt_tokens": 4412,
+        "completion_tokens": 268
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to get feedback when I enter an invalid zip code.",
+        "us_id": "g04-recycling_14"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Zip Code Validation Feedback\n\n  Scenario: Entering an invalid zip code during registration\n    Given I am on the registration page\n    When I enter an invalid zip code \"123\" in the zip code field\n    And I submit the registration form\n    Then I should see an error message indicating that the zip code is invalid\n    And the registration form should not be submitted\n\n  Scenario: Entering an invalid zip code when searching for facilities\n    Given I am on the recycling facility search page\n    When I enter an invalid zip code \"abcde\" in the zip code field\n    And I click the \"Search\" button\n    Then I should see an error message indicating that the zip code is invalid\n    And the search results should not be displayed\n\n  Scenario: Entering a valid zip code format but non-existent zip code\n    Given I am on the recycling facility search page\n    When I enter a valid zip code format \"00000\" that does not exist\n    And I click the \"Search\" button\n    Then I should see either a message indicating no results were found for that zip code\n    Or an error message indicating the zip code is not serviced\n\n  Scenario: Entering a valid zip code with leading zeros\n    Given I am on the recycling facility search page\n    When I enter a zip code with leading zeros \"01234\"\n    And I click the \"Search\" button\n    Then the search should proceed as normal with the provided zip code.\n```",
+        "created": 1762429324,
+        "prompt_tokens": 4700,
+        "completion_tokens": 318
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to create an acocunt, so that I can create my own profile.",
+        "us_id": "g04-recycling_15"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: User Account Creation\n\n  Scenario: Successfully creating a new account with valid credentials\n    Given I am on the registration page\n    When I enter a valid email \"newuser@example.com\", password \"Password123!\", and zip code \"90210\"\n    And I click the \"Register\" button\n    Then I should be redirected to the profile page\n    And I should see a success message indicating that my account has been created\n\n  Scenario: Attempting to create an account with an existing email address\n    Given I am on the registration page\n    When I enter an email address that is already registered \"existinguser@example.com\", a valid password \"Password123!\", and a valid zip code \"90210\"\n    And I click the \"Register\" button\n    Then I should see an error message indicating that the email address is already in use\n    And I should not be redirected to the profile page\n\n  Scenario: Attempting to create an account with a weak password\n    Given I am on the registration page\n    When I enter a valid email \"newuser@example.com\", a weak password \"password\", and a valid zip code \"90210\"\n    And I click the \"Register\" button\n    Then I should see an error message indicating that the password is too weak\n    And I should be prompted to enter a stronger password\n\n  Scenario: Attempting to create an account with missing information\n    Given I am on the registration page\n    When I enter a valid email \"newuser@example.com\" and a valid zip code \"90210\" but leave the password field blank\n    And I click the \"Register\" button\n    Then I should see an error message indicating that the password field is required\n    And I should not be redirected to the profile page\n```",
+        "created": 1762429327,
+        "prompt_tokens": 5045,
+        "completion_tokens": 396
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to be able to add or remove recycling facilities' information, so that users get the most recent information.",
+        "us_id": "g04-recycling_16"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Management of Recycling Facilities\n\n  Scenario: Admin adds a new recycling facility\n    Given I am logged in as an admin\n    When I navigate to the \"Add New Facility\" page\n    And I enter the facility name \"New Recycle Center\", address \"123 New Street\", zip code \"90210\", accepted materials \"Plastic, Glass\", and opening hours \"Mon-Fri 9-5\"\n    And I click the \"Save\" button\n    Then I should see a success message indicating the facility was added\n    And the new facility should be visible in the list of recycling facilities\n\n  Scenario: Admin edits an existing recycling facility's information\n    Given I am logged in as an admin\n    And a recycling facility \"Existing Recycle Center\" exists with address \"456 Old Street\"\n    When I navigate to the \"Edit Facility\" page for \"Existing Recycle Center\"\n    And I change the address to \"789 Updated Street\"\n    And I click the \"Save\" button\n    Then I should see a success message indicating the facility was updated\n    And the facility \"Existing Recycle Center\" should now have the address \"789 Updated Street\"\n\n  Scenario: Admin removes a recycling facility\n    Given I am logged in as an admin\n    And a recycling facility \"Remove Recycle Center\" exists\n    When I navigate to the \"Manage Facilities\" page\n    And I click the \"Delete\" button for \"Remove Recycle Center\"\n    And I confirm the deletion\n    Then I should see a success message indicating the facility was deleted\n    And the facility \"Remove Recycle Center\" should no longer be visible in the list of recycling facilities\n\n  Scenario: Non-admin users cannot access facility management pages\n    Given I am logged in as a regular user\n    When I try to navigate to the \"Add New Facility\" page\n    Then I should be redirected to an access denied page\n    And I should see an error message indicating that I do not have permission to access this page\n```",
+        "created": 1762429330,
+        "prompt_tokens": 5471,
+        "completion_tokens": 429
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to be able to read users' feedback and complaints, so that we can add more features and keep improving the service we provide to them.",
+        "us_id": "g04-recycling_17"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Access to User Feedback\n\n  Scenario: Admin views a list of user feedback submissions\n    Given I am logged in as an administrator\n    When I navigate to the \"User Feedback\" page in the admin panel\n    Then I should see a list of all user feedback submissions\n    And each submission should display the user's name (or anonymous if submitted anonymously), submission date, and a brief summary of the feedback\n\n  Scenario: Admin views the details of a specific feedback submission\n    Given I am logged in as an administrator\n    And there is a user feedback submission with the subject \"Feature Request: Mobile App\"\n    When I select the \"Feature Request: Mobile App\" submission from the list\n    Then I should see the full text of the user's feedback\n    And I should see the user's email address (if provided)\n    And I should see the date and time the feedback was submitted\n\n  Scenario: Admin can filter user feedback by category\n    Given I am logged in as an administrator\n    When I select \"Complaint\" from the category filter\n    Then I should see a list of only user feedback submissions categorized as complaints\n\n  Scenario: Admin can mark feedback as \"Resolved\"\n    Given I am logged in as an administrator\n    And there is a user feedback submission with the subject \"Incorrect Facility Hours\"\n    When I view the details of the \"Incorrect Facility Hours\" submission\n    And I click the \"Mark as Resolved\" button\n    Then the submission should be marked as resolved\n    And the submission should no longer appear in the \"Unresolved\" feedback list\n```",
+        "created": 1762429333,
+        "prompt_tokens": 5937,
+        "completion_tokens": 339
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to check transaction history and keep a record of it, so that I can go back when needed.",
+        "us_id": "g04-recycling_18"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: User Transaction History\n\n  Scenario: Viewing transaction history with previous transactions\n    Given I am logged in as a user\n    When I navigate to the \"Transaction History\" page\n    Then I should see a list of my previous transactions\n    And each transaction should display the date, amount, description, and status (e.g., \"Completed\", \"Pending\", \"Failed\")\n\n  Scenario: Viewing transaction history with no previous transactions\n    Given I am logged in as a user\n    And I have no previous transactions\n    When I navigate to the \"Transaction History\" page\n    Then I should see a message indicating that I have no transaction history\n\n  Scenario: Filtering transaction history by date range\n    Given I am logged in as a user\n    And I have transactions spanning multiple months\n    When I select a date range from \"2023-01-01\" to \"2023-03-31\"\n    And I click the \"Apply Filter\" button\n    Then I should see only transactions that occurred within the selected date range\n\n  Scenario: Downloading transaction history as a CSV file\n    Given I am logged in as a user\n    And I have a transaction history\n    When I click the \"Download CSV\" button\n    Then a CSV file containing my transaction history should be downloaded\n    And the CSV file should include the date, amount, description, and status of each transaction\n```",
+        "created": 1762429336,
+        "prompt_tokens": 6308,
+        "completion_tokens": 304
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to have a great UI and UX from the sites, so that I have a pleasant experience when navigating through them.",
+        "us_id": "g04-recycling_19"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Website UI/UX Quality\n\n  Scenario: Consistent visual design across all pages\n    Given I navigate to the homepage\n    When I navigate to the \"Recycling Facilities\" page\n    And I navigate to the \"Contact Us\" page\n    Then the website should maintain a consistent visual design across all pages, including:\n      | Element         | Property        |\n      | Header          | Font, color     |\n      | Navigation Menu | Style, position |\n      | Footer          | Content, layout |\n\n  Scenario: Responsive design adapts to different screen sizes\n    Given I view the website on a desktop computer\n    When I resize the browser window to a mobile phone size\n    Then the website layout should adapt responsively, including:\n      | Element                | Behavior                                     |\n      | Navigation Menu      | Collapses into a hamburger menu          |\n      | Images               | Scale appropriately                        |\n      | Text                 | Remains readable without horizontal scrolling |\n\n  Scenario: Intuitive navigation and clear call to actions\n    Given I am on the homepage\n    When I want to find nearby recycling facilities\n    Then the \"Find Facilities\" button should be prominently displayed\n    And the steps to initiate a search should be clear and intuitive\n\n  Scenario: Accessible website for users with disabilities\n    Given I am using a screen reader\n    When I navigate through the website\n    Then all interactive elements should have appropriate ARIA attributes\n    And all images should have descriptive alt text\n    And the website should meet WCAG accessibility guidelines\n```",
+        "created": 1762429338,
+        "prompt_tokens": 6644,
+        "completion_tokens": 324
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to access the site and do all the other stuffs on all of my electronic devices.",
+        "us_id": "g04-recycling_20"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Cross-Device Compatibility\n\n  Scenario: Website is accessible on desktop computers\n    Given I am using a desktop computer with Chrome browser\n    When I navigate to the website's homepage\n    Then the website should load correctly and be fully functional\n    And all interactive elements should be responsive to mouse clicks\n\n  Scenario: Website is accessible on mobile devices\n    Given I am using an Android mobile phone with Chrome browser\n    When I navigate to the website's homepage\n    Then the website should load correctly and be fully functional\n    And all interactive elements should be responsive to touch input\n    And the website layout should adapt to the smaller screen size\n\n  Scenario: Website is accessible on tablets\n    Given I am using an iPad with Safari browser\n    When I navigate to the website's homepage\n    Then the website should load correctly and be fully functional\n    And all interactive elements should be responsive to touch input\n    And the website layout should adapt to the tablet screen size\n\n  Scenario: Website functions correctly across different operating systems\n    Given I am using a Macbook with macOS and Safari browser\n    When I attempt to schedule a pickup\n    Then the scheduling process should function as expected, without any OS-specific errors\n    And the same scheduling process should function correctly on a Windows computer with Edge browser\n```",
+        "created": 1762429341,
+        "prompt_tokens": 6995,
+        "completion_tokens": 275
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to be able to block specific users based on IP address, so that I can prevent spamming on the websites.",
+        "us_id": "g04-recycling_21"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: IP Address Blocking\n\n  Scenario: Admin blocks a specific IP address\n    Given I am logged in as an administrator\n    When I navigate to the \"IP Blocking\" page in the admin panel\n    And I enter an IP address \"192.168.1.100\" in the IP address field\n    And I click the \"Block\" button\n    Then the IP address \"192.168.1.100\" should be added to the blocked IP list\n    And a confirmation message should be displayed\n\n  Scenario: User with blocked IP address attempts to access the website\n    Given the IP address \"192.168.1.100\" is blocked\n    When a user with the IP address \"192.168.1.100\" attempts to access the website\n    Then the user should be redirected to an error page or a blocked access message\n    And the user should not be able to access any content on the website\n\n  Scenario: Admin unblocks a previously blocked IP address\n    Given I am logged in as an administrator\n    And the IP address \"192.168.1.100\" is blocked\n    When I navigate to the \"IP Blocking\" page in the admin panel\n    And I click the \"Unblock\" button for the IP address \"192.168.1.100\"\n    Then the IP address \"192.168.1.100\" should be removed from the blocked IP list\n    And a confirmation message should be displayed\n\n  Scenario: User with unblocked IP address can access the website\n    Given the IP address \"192.168.1.100\" was previously blocked but has now been unblocked\n    When a user with the IP address \"192.168.1.100\" attempts to access the website\n    Then the user should be able to access the website normally\n```",
+        "created": 1762429343,
+        "prompt_tokens": 7301,
+        "completion_tokens": 437
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to view a dashboard that monitors all the sites' statuses, so that I can have a sense of what people are doing on our sites and know the service status.",
+        "us_id": "g04-recycling_22"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Dashboard Monitoring\n\n  Scenario: Viewing key website metrics on the dashboard\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see the total number of registered users\n    And I should see the number of daily active users\n    And I should see the total number of recycling facilities listed\n    And I should see the number of pickups scheduled today\n\n  Scenario: Monitoring website performance metrics\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see the average page load time\n    And I should see the server response time\n    And I should see a graph of website traffic over the past week\n\n  Scenario: Viewing a list of recent user activity\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see a list of recent user activity, including:\n      | Activity Type      | Example                                     |\n      | New User Registration | \"John Doe registered an account\"               |\n      | Pickup Scheduled      | \"Jane Smith scheduled a pickup for 2024-01-15\" |\n      | Feedback Submitted    | \"User X submitted feedback: 'Needs more options'\" |\n\n  Scenario: Receiving alerts for critical system events\n    Given I am logged in as an administrator\n    When a critical system event occurs (e.g., server outage, high error rate)\n    Then I should see a prominent alert on the admin dashboard\n    And the alert should provide details about the event and recommended actions\n```",
+        "created": 1762429346,
+        "prompt_tokens": 7780,
+        "completion_tokens": 338
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to have all data encrypted, so that important information will not be stolen during a server breach or an attack.",
+        "us_id": "g04-recycling_23"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Data Encryption\n\n  Scenario: User registration data is encrypted at rest\n    Given I am on the registration page\n    When I enter valid registration information including email \"testuser@example.com\" and password \"SecurePassword123\"\n    And I submit the registration form\n    Then the email \"testuser@example.com\" and password \"SecurePassword123\" should be encrypted in the database\n    And the database should not store the data in plain text\n\n  Scenario: User login credentials are encrypted during transmission\n    Given I am on the login page\n    When I enter my email \"testuser@example.com\" and password \"SecurePassword123\"\n    And I submit the login form\n    Then the email \"testuser@example.com\" and password \"SecurePassword123\" should be encrypted during transmission to the server\n    And the server should decrypt the credentials for authentication purposes\n\n  Scenario: Sensitive user data like addresses and payment information is encrypted\n    Given I am logged in as a user\n    When I update my profile with my address \"123 My Street\" and payment information\n    And I save the changes\n    Then my address \"123 My Street\" and payment information should be encrypted in the database\n    And only authorized personnel with proper decryption keys should be able to access the data in its decrypted form\n\n  Scenario: Backups are also encrypted\n    Given a database backup is created\n    Then the backup file should be encrypted\n    And the encryption key should be stored securely separate from the backup file\n```",
+        "created": 1762429349,
+        "prompt_tokens": 8149,
+        "completion_tokens": 334
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an executive, I want to have full access to data related to my company, so that I can have a sense of my company's performance.",
+        "us_id": "g04-recycling_24"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Executive Data Access and Reporting\n\n  Scenario: Viewing key performance indicators (KPIs) on an executive dashboard\n    Given I am logged in as an executive\n    When I navigate to the executive dashboard\n    Then I should see a summary of key performance indicators related to my company, including:\n      | KPI                            | Example                                       |\n      | Total waste recycled          | 1,000,000 lbs                               |\n      | Number of pickups completed    | 5,000                                        |\n      | User satisfaction rating       | 4.5 stars                                  |\n      | Cost savings from recycling     | $500,000                                     |\n\n  Scenario: Generating custom reports on recycling activity\n    Given I am logged in as an executive\n    When I navigate to the report generation page\n    And I select the date range \"2023-01-01\" to \"2023-12-31\"\n    And I select the report type \"Waste Composition by Material\"\n    And I click the \"Generate Report\" button\n    Then I should see a report displaying the breakdown of recycled waste by material type (e.g., plastic, glass, paper) for the selected date range\n    And I should be able to download the report in a format like PDF or CSV\n\n  Scenario: Drilling down into regional performance data\n    Given I am logged in as an executive\n    When I view a map of recycling activity by region\n    And I click on the \"California\" region\n    Then I should see detailed performance data for the California region, including:\n      | Metric                         | Example                                     |\n      | Total waste collected in CA     | 200,000 lbs                               |\n      | Number of participating businesses in CA | 1,000                                    |\n      | Average recycling rate in CA    | 70%                                         |\n\n  Scenario: Accessing data security and compliance reports\n    Given I am logged in as an executive\n    When I navigate to the \"Compliance Reports\" page\n    Then I should see reports related to data security and compliance, including:\n      | Report Type               | Description                                       |\n      | Data Encryption Audit    | Confirms that sensitive data is encrypted at rest and in transit |\n      | Privacy Policy Compliance | Verifies adherence to relevant privacy regulations |\n```",
+        "created": 1762429352,
+        "prompt_tokens": 8517,
+        "completion_tokens": 513
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an employee, I want to access the route planning system during work, so that I can be guided through the neighbourhood.",
+        "us_id": "g04-recycling_25"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Employee Route Planning System Access\n\n  Scenario: Accessing the route planning system with valid employee credentials\n    Given I am on the route planning system login page\n    When I enter my valid employee username and password\n    And I click the \"Login\" button\n    Then I should be redirected to the route planning dashboard\n\n  Scenario: Viewing the assigned route for the day\n    Given I am logged in as an employee\n    When I navigate to the \"My Route\" page\n    Then I should see a map displaying my assigned route for the day\n    And the route should include a list of addresses to visit in the correct order\n\n  Scenario: Receiving turn-by-turn directions for each stop\n    Given I am logged in as an employee\n    And I am viewing my assigned route\n    When I select the next address on the route\n    Then I should see turn-by-turn directions to the selected address\n    And the directions should be optimized for my mode of transportation (e.g., truck, bicycle, walking)\n\n  Scenario: Marking a stop as completed and advancing to the next stop\n    Given I am logged in as an employee\n    And I have arrived at a stop on my route\n    When I click the \"Mark as Completed\" button for that stop\n    Then the stop should be marked as completed on the map and in the address list\n    And the route planning system should automatically highlight the next stop on the route\n```",
+        "created": 1762429356,
+        "prompt_tokens": 9058,
+        "completion_tokens": 307
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an employee from the HR department, I want to have access to the full information of all employees working for this business.",
+        "us_id": "g04-recycling_26"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: HR Employee Data Access\n\n  Scenario: Viewing a list of all employees\n    Given I am logged in as an HR employee\n    When I navigate to the \"Employee Directory\" page\n    Then I should see a list of all employees working for the business\n    And each employee listing should display their name, job title, and department\n\n  Scenario: Viewing detailed information for a specific employee\n    Given I am logged in as an HR employee\n    When I select an employee from the \"Employee Directory\" page\n    Then I should see detailed information about the selected employee, including:\n      | Information Field |\n      | Employee ID       |\n      | Contact Information (Phone number, email address) |\n      | Job Title         |\n      | Department          |\n      | Start Date          |\n      | Salary Information  |\n      | Emergency Contact Information |\n\n  Scenario: Searching for an employee by name or department\n    Given I am logged in as an HR employee\n    When I enter \"John Doe\" in the employee search field\n    And I click the \"Search\" button\n    Then I should see a list of employees matching the search criteria \"John Doe\"\n\n  Scenario: Exporting employee data to a spreadsheet\n    Given I am logged in as an HR employee\n    When I click the \"Export to CSV\" button on the Employee Directory page\n    Then a CSV file containing the full employee directory data should be downloaded\n    And the CSV file should include all relevant employee information fields as columns\n```",
+        "created": 1762429359,
+        "prompt_tokens": 9393,
+        "completion_tokens": 321
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a developer, I want to access an API from the website, so that I can integrate it and implement certain features in my own iOS application.",
+        "us_id": "g04-recycling_27"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: API Access for Developers\n\n  Scenario: Accessing the API documentation\n    Given I am on the developer documentation page\n    When I navigate to the API section\n    Then I should see a clear and comprehensive documentation of the available API endpoints\n    And the documentation should include information about request methods, parameters, and response formats\n\n  Scenario: Successfully authenticating with the API\n    Given I have a valid API key\n    When I make a request to an API endpoint that requires authentication\n    And I include my API key in the request header\n    Then the API request should be successfully authenticated\n    And I should receive the expected response data\n\n  Scenario: Receiving an error when authenticating with an invalid API key\n    Given I have an invalid API key\n    When I make a request to an API endpoint that requires authentication\n    And I include my invalid API key in the request header\n    Then the API request should return an authentication error, such as a 401 Unauthorized status code\n\n  Scenario: Retrieving a list of recycling facilities via the API\n    Given I have a valid API key\n    When I make a GET request to the \"/facilities\" endpoint\n    Then I should receive a JSON response containing a list of recycling facilities\n    And each facility object in the response should include its name, address, and accepted materials\n```",
+        "created": 1762429361,
+        "prompt_tokens": 9747,
+        "completion_tokens": 282
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to receive tempting rewards, so that I have a reason to use the website.",
+        "us_id": "g04-recycling_28"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: User Rewards and Incentives\n\n  Scenario: Earning points for recycling activities\n    Given I am a registered user\n    When I schedule a recycling pickup through the website\n    Then I should earn points based on the amount of material recycled\n    And the points should be added to my account balance\n\n  Scenario: Redeeming points for rewards\n    Given I am a registered user with accumulated points\n    When I navigate to the rewards redemption page\n    Then I should see a list of available rewards with their corresponding point values\n    And I should be able to redeem my points for a reward, such as a discount or a gift certificate\n\n  Scenario: Receiving a welcome reward upon registration\n    Given I am a new user\n    When I successfully register an account on the website\n    Then I should receive a welcome reward, such as bonus points or a discount code\n    And I should see a notification about the welcome reward on my profile page\n\n  Scenario: Receiving notifications about new reward opportunities\n    Given I am a registered user\n    When a new reward program or promotion is launched\n    Then I should receive an email notification or a website notification about the new opportunity\n    And the notification should include details about the reward and how to earn it\n```",
+        "created": 1762429364,
+        "prompt_tokens": 10057,
+        "completion_tokens": 261
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to have my personal information kept securely in the database of the website, so that I will not suffer from identity theft or telephone harassment.",
+        "us_id": "g04-recycling_29"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Personal Information Security\n\n  Scenario: Personal information is encrypted at rest in the database\n    Given I am a registered user\n    When I update my profile with my name, address, and phone number\n    Then my name, address, and phone number should be encrypted when stored in the database\n    And the database should use a strong encryption algorithm\n\n  Scenario: Password hashing for secure password storage\n    Given I am on the login page\n    When I enter my email and password\n    And I submit the login form\n    Then my password should be hashed using a strong hashing algorithm (e.g., bcrypt, Argon2) before being stored in the database\n    And the plain text password should never be stored\n\n  Scenario: Secure data transmission using HTTPS\n    Given I am browsing the website\n    Then all communication between my browser and the website should be encrypted using HTTPS\n    And the website should have a valid SSL certificate\n\n  Scenario: Regular security audits and vulnerability scanning\n    Given the website is in production\n    Then regular security audits and vulnerability scanning should be performed\n    And any identified vulnerabilities should be promptly addressed and patched\n```",
+        "created": 1762429366,
+        "prompt_tokens": 10354,
+        "completion_tokens": 240
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to handle all users' activities, so that I can manage more efficiently.",
+        "us_id": "g04-recycling_30"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Control of User Activities\n\n  Scenario: Viewing a user's profile and activity history\n    Given I am logged in as an administrator\n    When I navigate to a specific user's profile page\n    Then I should see the user's profile information (e.g., name, email address, registration date)\n    And I should see a log of the user's recent activities on the website (e.g., logins, pickups scheduled, feedback submitted)\n\n  Scenario: Suspending or banning a user account\n    Given I am logged in as an administrator\n    When I view a user's profile\n    And I click the \"Suspend Account\" or \"Ban Account\" button\n    Then the user's account should be suspended or banned, preventing them from logging in\n    And a reason for the suspension or ban should be recorded\n\n  Scenario: Resetting a user's password\n    Given I am logged in as an administrator\n    When I view a user's profile\n    And I click the \"Reset Password\" button\n    Then a temporary password should be generated and sent to the user's email address\n    And the user should be prompted to change their password upon their next login\n\n  Scenario: Impersonating a user to troubleshoot issues\n    Given I am logged in as an administrator\n    When I view a user's profile\n    And I click the \"Impersonate User\" button\n    Then I should be logged in as that user and able to access the website as they do\n    And I should be able to revert back to my administrator account when troubleshooting is complete\n```",
+        "created": 1762429368,
+        "prompt_tokens": 10618,
+        "completion_tokens": 344
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a company, I want to have a website that is easy to use, so that I can upload or delete stuff step by step.",
+        "us_id": "g04-recycling_31"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: User-Friendly Content Management\n\n  Scenario: Uploading a new document with clear instructions\n    Given I am logged in as a content administrator\n    When I navigate to the \"Upload Document\" page\n    Then I should see a clear and concise description of the allowed file types and sizes\n    And I should see a prominent \"Choose File\" button\n    And after selecting a file, I should see a progress bar indicating the upload status\n    And after the upload is complete, I should see a confirmation message\n\n  Scenario: Editing an existing document with a WYSIWYG editor\n    Given I am logged in as a content administrator\n    And a document named \"Company Policy\" exists\n    When I navigate to the \"Edit Document\" page for \"Company Policy\"\n    Then I should see a WYSIWYG editor allowing me to format the text, insert images, and create links\n    And I should be able to preview the changes before saving\n\n  Scenario: Deleting a document with a confirmation step\n    Given I am logged in as a content administrator\n    And a document named \"Outdated Guide\" exists\n    When I navigate to the \"Manage Documents\" page\n    And I click the \"Delete\" button next to \"Outdated Guide\"\n    Then I should see a confirmation dialog asking if I am sure I want to delete the document\n    And after confirming the deletion, the document should be removed from the list\n\n  Scenario: Organizing documents into categories with drag-and-drop functionality\n    Given I am logged in as a content administrator\n    When I navigate to the \"Manage Categories\" page\n    Then I should see a list of available categories\n    And I should be able to drag and drop documents into the desired categories\n    And the document association with the category should be updated automatically\n```",
+        "created": 1762429371,
+        "prompt_tokens": 10993,
+        "completion_tokens": 379
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an employee, I want to get quick notifications, so that I can process cases the first time.",
+        "us_id": "g04-recycling_32"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Employee Quick Notifications\n\n  Scenario: Receiving a new case assignment notification\n    Given I am logged in as an employee\n    When a new case is assigned to me\n    Then I should receive a visual notification on the website (e.g., a badge on the notifications icon)\n    And I should receive an email notification with the case details\n    And I should optionally receive a push notification on my mobile device\n\n  Scenario: Receiving a notification for a high-priority case\n    Given I am logged in as an employee\n    When a new case is assigned to me with a \"High\" priority\n    Then the notification should be visually distinct from regular notifications (e.g., a different color or icon)\n    And the notification should include a clear indication of the case priority\n\n  Scenario: Receiving a notification when a case is updated\n    Given I am logged in as an employee\n    And I am currently assigned to a case\n    When another employee adds a comment to the case\n    Then I should receive a notification indicating that the case has been updated\n    And the notification should include a summary of the update\n\n  Scenario: Customizing notification preferences\n    Given I am logged in as an employee\n    When I navigate to the \"Notification Settings\" page\n    Then I should be able to customize which types of notifications I receive (e.g., email, push, website)\n    And I should be able to set the frequency of notifications\n```",
+        "created": 1762429375,
+        "prompt_tokens": 11396,
+        "completion_tokens": 307
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a company accountant, I want to view all available activity fees online, so that I can easily create a bill statement.",
+        "us_id": "g04-recycling_33"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Accountant Access to Activity Fees\n\n  Scenario: Viewing a list of all activity fees\n    Given I am logged in as a company accountant\n    When I navigate to the \"Activity Fees\" page\n    Then I should see a list of all defined activity fees\n    And each fee listing should display the activity type, description, and fee amount\n\n  Scenario: Filtering activity fees by type or date range\n    Given I am logged in as a company accountant\n    When I select \"Recycling Pickup\" from the activity type filter\n    And I click the \"Apply Filter\" button\n    Then I should see a list of only activity fees related to recycling pickups\n\n  Scenario: Downloading activity fee data as a CSV file\n    Given I am logged in as a company accountant\n    When I click the \"Export to CSV\" button on the Activity Fees page\n    Then a CSV file containing the activity fee data should be downloaded\n    And the CSV file should include the activity type, description, fee amount, and date created\n\n  Scenario: Viewing the total activity fees incurred by a specific user or company\n    Given I am logged in as a company accountant\n    When I search for a specific user or company\n    And I navigate to their activity fee history\n    Then I should see a list of all activity fees incurred by that user or company\n    And I should see the total amount of activity fees incurred\n```",
+        "created": 1762429377,
+        "prompt_tokens": 11731,
+        "completion_tokens": 295
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a developer, I want to use bootstrap in the process of developing, so that I can easily design my website.",
+        "us_id": "g04-recycling_34"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Bootstrap Integration\n\n  Scenario: Bootstrap CSS is correctly loaded\n    Given I am on any page of the website\n    When the page loads\n    Then the Bootstrap CSS file should be loaded\n    And the page should display with Bootstrap styling (e.g., default Bootstrap font, spacing, and colors)\n\n  Scenario: Bootstrap JavaScript components are functional\n    Given I am on a page with a Bootstrap modal\n    When I click the button that triggers the modal\n    Then the Bootstrap modal should appear correctly\n    And I should be able to interact with the modal (e.g., close it, submit a form)\n\n  Scenario: Bootstrap grid system is used for responsive layout\n    Given I am on a page with a Bootstrap grid layout\n    When I resize the browser window to different screen sizes (desktop, tablet, mobile)\n    Then the elements within the grid should rearrange responsively according to the Bootstrap grid system\n    And the content should remain readable and accessible on all screen sizes\n\n  Scenario: Bootstrap components are styled consistently with the website's design\n    Given I am on a page with Bootstrap buttons and forms\n    Then the Bootstrap buttons and forms should be styled to match the overall website design (e.g., colors, fonts, borders)\n    And the styling should not conflict with the default Bootstrap styling\n```",
+        "created": 1762429380,
+        "prompt_tokens": 12053,
+        "completion_tokens": 280
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a developer, I want to attend some UI/UX lessons, so that I can develop an awesome and beautiful features website.",
+        "us_id": "g04-recycling_35"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: UI/UX Training and Implementation\n\n  Scenario: Access to UI/UX training resources is available\n    Given I am a developer on the team\n    When I request access to UI/UX training materials\n    Then I should be granted access to online courses, workshops, or internal training sessions on UI/UX best practices\n    And the training materials should cover topics relevant to our website's features\n\n  Scenario: Incorporating UI/UX feedback into development process\n    Given I am developing a new feature\n    When I present the initial design to the UI/UX team for review\n    Then I should receive constructive feedback on the design's usability, accessibility, and visual appeal\n    And I should incorporate that feedback into the final implementation\n\n  Scenario: Utilizing a consistent design system and component library\n    Given I am developing a new feature\n    When I need to implement a common UI element, such as a button or form field\n    Then I should utilize a pre-defined component from the design system and component library\n    And the component should adhere to established UI/UX guidelines\n\n  Scenario: Conducting user testing to validate UI/UX designs\n    Given I have implemented a new feature\n    When I invite users to test the feature and provide feedback\n    Then I should collect data on their experience, including ease of use, task completion rate, and overall satisfaction\n    And I should use that data to iterate on the design and implementation\n```",
+        "created": 1762429382,
+        "prompt_tokens": 12362,
+        "completion_tokens": 303
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to view all locations of recycling centers on a map, so that I can check which routes to take to drop off waste.",
+        "us_id": "g04-recycling_36"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Recycling Center Map View with Route Planning\n\n  Scenario: Displaying recycling center locations on a map\n    Given I am on the recycling center map page\n    Then I should see a map centered on my current location (or a default location if location is unavailable)\n    And the map should display markers indicating the location of nearby recycling centers\n    And each marker should be clearly visible and distinguishable\n\n  Scenario: Displaying details when clicking on a recycling center marker\n    Given I am on the recycling center map page\n    And the map displays a marker for \"Eco-Friendly Recycling\"\n    When I click on the \"Eco-Friendly Recycling\" marker\n    Then a popup window should appear displaying the recycling center's name, address, phone number, and operating hours\n    And the popup should also display accepted materials\n\n  Scenario: Generating a route to a selected recycling center\n    Given I am on the recycling center map page\n    And I have clicked on a marker for \"Green Solutions Recycling\"\n    When I click the \"Get Directions\" button in the popup window\n    Then the map should display a route from my current location to \"Green Solutions Recycling\"\n    And the route should include turn-by-turn directions\n    And the route should offer options for different transportation modes (e.g., driving, walking, public transit)\n\n  Scenario: Searching for recycling centers in a specific area\n    Given I am on the recycling center map page\n    When I enter an address \"123 Elm Street\" in the search field\n    And I click the \"Search\" button\n    Then the map should zoom to the searched address\n    And the map should display recycling centers near \"123 Elm Street\"\n```",
+        "created": 1762429385,
+        "prompt_tokens": 12699,
+        "completion_tokens": 363
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to upload my week's schedule, so that I can get recommendations for recycling centers that best fit my availability.",
+        "us_id": "g04-recycling_37"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Schedule-Based Recycling Center Recommendations\n\n  Scenario: Uploading a valid schedule file\n    Given I am logged in as a user\n    When I navigate to the \"Schedule Upload\" page\n    And I select a valid schedule file (e.g., .ics, .csv)\n    And I click the \"Upload\" button\n    Then I should see a success message indicating that my schedule has been uploaded\n    And the system should parse the schedule file correctly\n\n  Scenario: Receiving recycling center recommendations based on uploaded schedule\n    Given I am logged in as a user\n    And I have uploaded my schedule\n    When I navigate to the \"Recycling Center Recommendations\" page\n    Then I should see a list of recycling centers that are open during my available time slots\n    And each recommendation should include the recycling center's name, address, operating hours, and a compatibility score based on my schedule\n\n  Scenario: Handling an invalid schedule file upload\n    Given I am logged in as a user\n    When I navigate to the \"Schedule Upload\" page\n    And I select an invalid schedule file (e.g., a PDF file)\n    And I click the \"Upload\" button\n    Then I should see an error message indicating that the file format is not supported\n    And the system should prompt me to upload a valid schedule file\n\n  Scenario: Viewing and editing my uploaded schedule\n    Given I am logged in as a user\n    And I have uploaded my schedule\n    When I navigate to the \"Manage Schedule\" page\n    Then I should see a visual representation of my uploaded schedule (e.g., a calendar view)\n    And I should be able to edit or delete specific time slots or events in my schedule\n```",
+        "created": 1762429388,
+        "prompt_tokens": 13094,
+        "completion_tokens": 364
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to link my email account to my profile, so that I can get a temporary password in case I forget my own one.",
+        "us_id": "g04-recycling_38"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Email Account Linking for Password Recovery\n\n  Scenario: Linking an email account to my profile successfully\n    Given I am logged in as a user\n    When I navigate to the \"Profile Settings\" page\n    And I enter a valid email address \"myemail@example.com\" in the \"Link Email\" field\n    And I click the \"Link Email\" button\n    Then I should receive a verification email at \"myemail@example.com\"\n    And after clicking the verification link in the email, my email address should be linked to my profile\n    And I should see a confirmation message on the \"Profile Settings\" page\n\n  Scenario: Requesting a password reset with a linked email account\n    Given I am on the login page\n    And I have linked my email account to my profile\n    When I click the \"Forgot Password\" link\n    And I enter my email address \"myemail@example.com\"\n    And I click the \"Reset Password\" button\n    Then I should receive an email with a temporary password or a password reset link\n    And I should be able to log in with the temporary password or reset my password using the link\n\n  Scenario: Attempting to link an email account that is already in use\n    Given I am logged in as a user\n    When I navigate to the \"Profile Settings\" page\n    And I enter an email address \"existingemail@example.com\" that is already linked to another account in the \"Link Email\" field\n    And I click the \"Link Email\" button\n    Then I should see an error message indicating that the email address is already in use\n    And my email address should not be linked to my profile\n\n  Scenario: Requesting a password reset without a linked email account\n    Given I am on the login page\n    And I have not linked my email account to my profile\n    When I click the \"Forgot Password\" link\n    And I enter my username or a non-linked email address\n    And I click the \"Reset Password\" button\n    Then I should see a message indicating that no matching account was found or that a linked email is required for password reset\n```",
+        "created": 1762429391,
+        "prompt_tokens": 13492,
+        "completion_tokens": 457
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to contact the administrators, so that I can give feedback or ask for help.",
+        "us_id": "g04-recycling_39"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Contacting Administrators\n\n  Scenario: Submitting a contact form with a valid message\n    Given I am on the \"Contact Us\" page\n    When I enter my name, email address, and a message in the contact form\n    And I click the \"Submit\" button\n    Then I should see a confirmation message indicating that my message has been sent\n    And the message should be sent to the administrators\n\n  Scenario: Receiving an automated response after submitting the contact form\n    Given I have submitted a contact form with a valid message\n    Then I should receive an automated email response confirming that my message has been received\n    And the email should include a reference number or estimated response time\n\n  Scenario: Contacting administrators via email\n    Given I am on the \"Contact Us\" page\n    Then I should see a clearly displayed email address for contacting the administrators\n    And the email address should be clickable, opening my email client\n\n  Scenario: Contacting administrators via phone\n    Given I am on the \"Contact Us\" page\n    Then I should see a clearly displayed phone number for contacting the administrators\n    And the phone number should be formatted correctly for easy dialing\n```",
+        "created": 1762429394,
+        "prompt_tokens": 13974,
+        "completion_tokens": 247
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to add recycling center information, so that I can keep the database up-to-date over time.",
+        "us_id": "g04-recycling_40"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Addition of Recycling Center Information\n\n  Scenario: Adding a new recycling center with all required information\n    Given I am logged in as an administrator\n    When I navigate to the \"Add Recycling Center\" page\n    And I enter the following information:\n      | Field           | Value                          |\n      | Name            | \"EcoRecycle Hub\"               |\n      | Address         | \"456 Oak Avenue, Anytown USA\"  |\n      | Zip Code        | \"12345\"                        |\n      | Phone Number    | \"555-123-4567\"                 |\n      | Accepted Materials | \"Plastic, Paper, Glass\"        |\n      | Operating Hours | \"Mon-Fri 9am-5pm\"              |\n    And I click the \"Save\" button\n    Then I should see a success message indicating that the recycling center has been added\n    And the new recycling center should be visible in the list of recycling centers\n\n  Scenario: Adding a new recycling center with only required information\n    Given I am logged in as an administrator\n    When I navigate to the \"Add Recycling Center\" page\n    And I enter the following information:\n      | Field           | Value                      |\n      | Name            | \"Minimal Recycle\"          |\n      | Address         | \"789 Pine Street, Anytown\" |\n      | Zip Code        | \"67890\"                    |\n    And I click the \"Save\" button\n    Then I should see a success message indicating that the recycling center has been added\n    And the new recycling center should be visible in the list of recycling centers\n\n  Scenario: Attempting to add a recycling center with missing required information\n    Given I am logged in as an administrator\n    When I navigate to the \"Add Recycling Center\" page\n    And I leave the \"Name\" field blank\n    And I enter valid information in other required fields\n    And I click the \"Save\" button\n    Then I should see an error message indicating that the \"Name\" field is required\n    And the recycling center should not be added\n\n  Scenario: Handling duplicate recycling center entries\n    Given I am logged in as an administrator\n    And a recycling center named \"Duplicate Recycle\" already exists\n    When I navigate to the \"Add Recycling Center\" page\n    And I enter the same Name, Address, and Zip Code as the existing recycling center \"Duplicate Recycle\"\n    And I click the \"Save\" button\n    Then I should see an error message indicating that a recycling center with the same name, address, and zip code already exists\n    And the recycling center should not be added\n```",
+        "created": 1762429397,
+        "prompt_tokens": 14251,
+        "completion_tokens": 570
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to view user error logs, so that I can fix or review any issues that are being faced by users of the system.",
+        "us_id": "g04-recycling_41"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Access to User Error Logs\n\n  Scenario: Viewing a list of user error logs\n    Given I am logged in as an administrator\n    When I navigate to the \"Error Logs\" page in the admin panel\n    Then I should see a list of all user error logs\n    And each error log entry should display the timestamp, user ID (if available), error message, and the URL where the error occurred\n\n  Scenario: Filtering error logs by date range\n    Given I am logged in as an administrator\n    When I select a date range from \"2023-01-01\" to \"2023-01-31\" in the error log filter\n    And I click the \"Apply Filter\" button\n    Then I should see only error logs that occurred within the selected date range\n\n  Scenario: Viewing the details of a specific error log entry\n    Given I am logged in as an administrator\n    And there is an error log entry with the message \"Failed to load resource\"\n    When I select the \"Failed to load resource\" entry from the list\n    Then I should see the full details of the error, including:\n      | Detail          |\n      | Timestamp       |\n      | User ID (if available) |\n      | Error Message     |\n      | URL           |\n      | User Agent        |\n      | Stack Trace (if available) |\n\n  Scenario: Downloading error logs as a CSV file\n    Given I am logged in as an administrator\n    When I click the \"Download CSV\" button on the Error Logs page\n    Then a CSV file containing the error log data should be downloaded\n    And the CSV file should include all relevant error information fields as columns\n```",
+        "created": 1762429401,
+        "prompt_tokens": 14855,
+        "completion_tokens": 369
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to onboard recycling centers on the platform, so that I can increase information accuracy.",
+        "us_id": "g04-recycling_42"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Recycling Center Onboarding\n\n  Scenario: Initiating the onboarding process for a new recycling center\n    Given I am logged in as an administrator\n    When I navigate to the \"Onboard Recycling Center\" page\n    And I enter the Recycling Center's Name, Address, Contact Person, and Contact Email\n    And I click the \"Send Invitation\" button\n    Then an invitation email should be sent to the provided contact email address\n    And the system should record the onboarding request with a status of \"Pending\"\n\n  Scenario: Recycling center completes the onboarding process after receiving an invitation\n    Given a recycling center has received an onboarding invitation email\n    When the recycling center clicks the link in the email\n    Then they are redirected to the Recycling Center Onboarding form\n    And they fill out all required information including Accepted Materials, Operating Hours, and Photos\n    And they submit the Onboarding Form\n    Then the system should validate the provided information\n    And the system should update the onboarding request status to \"Completed\"\n    And the Recycling Center should be added to the platform with the provided information\n\n  Scenario: Administrator approves a completed onboarding request\n    Given I am logged in as an administrator\n    And a Recycling Center has completed the onboarding form\n    When I navigate to the \"Review Onboarding Requests\" page\n    Then I should see a list of pending onboarding requests\n    And I select the Recycling Center's onboarding request\n    And I review the provided information\n    And I click the \"Approve\" button\n    Then the Recycling Center information should be added to the platform\n    And the Onboarding Request Status should be updated to \"Approved\"\n\n  Scenario: Administrator rejects a completed onboarding request\n    Given I am logged in as an administrator\n    And a Recycling Center has completed the onboarding form\n    When I navigate to the \"Review Onboarding Requests\" page\n    Then I select the Recycling Center's onboarding request\n    And I review the provided information\n    And I determine that the information is not accurate or complete\n    And I click the \"Reject\" button\n    Then I should be prompted to provide a reason for the rejection\n    And the Recycling Center information should not be added to the platform\n    And the Onboarding Request Status should be updated to \"Rejected\"\n```",
+        "created": 1762429404,
+        "prompt_tokens": 15249,
+        "completion_tokens": 478
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a superuser, I want to update the recycling center information, so that I can provide the latest information about the recycling center.",
+        "us_id": "g04-recycling_43"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Superuser Recycling Center Information Update\n\n  Scenario: Superuser updates existing recycling center information\n    Given I am logged in as a superuser\n    And I am viewing the details page for \"Eco-Friendly Recycling Center\"\n    When I click the \"Edit\" button\n    And I modify the \"Accepted Materials\" field to include \"Cardboard\"\n    And I modify the \"Operating Hours\" to \"Mon-Fri 8 AM - 6 PM\"\n    And I click the \"Save Changes\" button\n    Then I should see a success message indicating the information was updated\n    And the details page for \"Eco-Friendly Recycling Center\" should now display \"Accepted Materials: Plastic, Glass, Paper, Cardboard\"\n    And the details page should display \"Operating Hours: Mon-Fri 8 AM - 6 PM\"\n\n  Scenario: Superuser updates the location of a recycling center\n    Given I am logged in as a superuser\n    And I am viewing the details page for \"Central Recycling Depot\"\n    When I click the \"Edit\" button\n    And I change the address from \"123 Main Street\" to \"456 Oak Avenue\"\n    And I click the \"Save Changes\" button\n    Then I should see a success message indicating the information was updated\n    And the map on the details page for \"Central Recycling Depot\" should be updated to reflect the new address\n    And search results should reflect the new address\n\n  Scenario: Superuser attempts to update with invalid data\n    Given I am logged in as a superuser\n    And I am viewing the details page for \"Community Recycling Center\"\n    When I click the \"Edit\" button\n    And I attempt to enter an invalid phone number format (e.g., \"not a number\") in the \"Phone Number\" field\n    And I click the \"Save Changes\" button\n    Then I should see an error message indicating the phone number format is invalid\n    And the information should not be updated\n\n  Scenario: Superuser can deactivate a recycling center\n    Given I am logged in as a superuser\n    And a recycling center \"Inactive Recycling\" is currently active\n    When I navigate to the \"Edit\" page for \"Inactive Recycling\"\n    And I click the \"Deactivate\" button\n    Then the \"Inactive Recycling\" should be marked as inactive in the system\n    And it should no longer appear in search results for regular users\n```",
+        "created": 1762429408,
+        "prompt_tokens": 15757,
+        "completion_tokens": 514
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a superuser, I want to view users' stats, so that I can view in real-time how many users have visited my recycling center information and their recyclable waste.",
+        "us_id": "g04-recycling_44"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Superuser Access to User Recycling Statistics\n\n  Scenario: Viewing the number of visits to a recycling center's information page\n    Given I am logged in as a superuser\n    When I navigate to the details page for \"Eco-Friendly Recycling Center\"\n    Then I should see a statistic displaying the total number of user visits to this page\n\n  Scenario: Viewing the types of recyclable waste selected by users for a specific recycling center\n    Given I am logged in as a superuser\n    When I navigate to the statistics page for \"Green Solutions Recycling\"\n    Then I should see a breakdown of the recyclable waste types selected by users who have viewed this recycling center, including:\n      | Waste Type | Percentage |\n      | Plastic      | 30%        |\n      | Glass        | 40%        |\n      | Paper        | 20%        |\n      | Metal        | 10%        |\n\n  Scenario: Viewing the geographic distribution of users who have viewed a recycling center\n    Given I am logged in as a superuser\n    When I navigate to the statistics page for \"Community Recycling Center\"\n    Then I should see a map displaying the geographic distribution of users who have viewed this recycling center, based on their IP address location\n    And I should be able to zoom in and out on the map to see more or less detail\n\n  Scenario: Downloading user statistics data as a CSV file\n    Given I am logged in as a superuser\n    When I navigate to the statistics page for \"All-In-One Recycling Facility\"\n    And I click the \"Download Stats\" button\n    Then a CSV file containing the user statistics data should be downloaded\n    And the CSV file should include the number of visits, waste type breakdown, and geographic distribution data\n```",
+        "created": 1762429412,
+        "prompt_tokens": 16310,
+        "completion_tokens": 382
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a superuser, I want to reply to user questions, so that I can answer any questions about my recycling center.",
+        "us_id": "g04-recycling_45"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Superuser Reply to User Questions\n\n  Scenario: Viewing a list of unanswered user questions for a recycling center\n    Given I am logged in as a superuser\n    And I navigate to the \"User Questions\" page for \"Eco-Friendly Recycling Center\"\n    Then I should see a list of all unanswered questions submitted by users for that recycling center\n    And each question should display the user's name (or \"Anonymous\"), the question text, and the date submitted\n\n  Scenario: Replying to a user question\n    Given I am logged in as a superuser\n    And I am viewing a specific user question on the \"User Questions\" page\n    When I enter my response in the reply text area\n    And I click the \"Submit Reply\" button\n    Then my reply should be displayed below the user's question\n    And the status of the question should be updated to \"Answered\"\n    And the user should receive an email notification that their question has been answered\n\n  Scenario: Editing a previously submitted reply\n    Given I am logged in as a superuser\n    And I have previously replied to a user question\n    When I click the \"Edit\" button on my reply\n    And I modify the text of my reply\n    And I click the \"Save Changes\" button\n    Then my updated reply should be displayed below the user's question\n    And the user should receive an email notification that my reply has been updated\n\n  Scenario: Handling inappropriate questions or comments\n    Given I am logged in as a superuser\n    And I am viewing a user question that is inappropriate or spam\n    When I click the \"Delete Question\" button\n    Then the question should be removed from the list\n    And a record of the deleted question should be logged for auditing purposes\n```",
+        "created": 1762429415,
+        "prompt_tokens": 16720,
+        "completion_tokens": 377
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to be able to have a dashboard that shows usage stats and locations, so that I can identify the neighbourhoods with the largest number of drop-offs and to try getting more facilities involved.",
+        "us_id": "g04-recycling_46"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Dashboard for Usage Stats and Location Analysis\n\n  Scenario: Displaying overall usage statistics on the dashboard\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see the following usage statistics:\n      | Statistic                       | Description                                                              |\n      | Total number of registered users | The total number of registered users on the platform                     |\n      | Number of pickups scheduled this week | The number of waste pickups scheduled in the current week             |\n      | Average rating of recycling centers | The average user rating of all recycling centers on the platform         |\n      | Total weight of waste recycled this month | The total weight of waste recycled through the platform this month |\n\n  Scenario: Displaying a map showing the geographic distribution of drop-offs\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see a map overlayed with heatmaps or markers indicating the number of drop-offs in different neighborhoods\n    And the map should allow me to zoom in and out to see more or less detail\n    And the map should allow me to hover over a neighborhood to see the exact number of drop-offs\n\n  Scenario: Filtering usage statistics by location\n    Given I am logged in as an administrator\n    When I select a specific city or region from the location filter\n    Then the usage statistics displayed on the dashboard should be filtered to only include data from that location\n    And the map should re-center on the selected location\n\n  Scenario: Identifying and displaying neighborhoods with the highest number of drop-offs\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see a list of the top 5 neighborhoods with the highest number of drop-offs\n    And each neighborhood listing should display the number of drop-offs and a link to view more details about that neighborhood\n\n  Scenario: Identifying areas with low facility involvement and encouraging more facilities to onboard\n    Given I am logged in as an administrator\n    When I navigate to the admin dashboard\n    Then I should see a report showing geographical areas with low recycling facility coverage compared to user density\n    And the report should suggest outreach strategies to encourage participation from facilities in those areas\n```",
+        "created": 1762429418,
+        "prompt_tokens": 17143,
+        "completion_tokens": 475
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As an admin, I want to be able to communicate directly with facilities, so that I can keep them updated about features we have on our website.",
+        "us_id": "g04-recycling_47"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Admin Communication with Recycling Facilities\n\n  Scenario: Sending a targeted message to all recycling facilities\n    Given I am logged in as an administrator\n    When I navigate to the \"Communicate with Facilities\" page\n    And I select \"All Facilities\" as the recipient\n    And I enter a subject and message body\n    And I click the \"Send Message\" button\n    Then a message should be sent to the contact email address for all recycling facilities on the platform\n    And I should see a confirmation message indicating that the message has been sent\n\n  Scenario: Sending a message to a specific recycling facility\n    Given I am logged in as an administrator\n    When I navigate to the \"Communicate with Facilities\" page\n    And I select a specific recycling facility \"Eco-Friendly Recycling Center\" as the recipient\n    And I enter a subject and message body\n    And I click the \"Send Message\" button\n    Then a message should be sent to the contact email address for \"Eco-Friendly Recycling Center\"\n    And I should see a confirmation message indicating that the message has been sent\n\n  Scenario: Viewing a history of communications sent to recycling facilities\n    Given I am logged in as an administrator\n    When I navigate to the \"Communication History\" page\n    Then I should see a list of all messages sent to recycling facilities\n    And each message should display the recipient, subject, date sent, and a preview of the message body\n\n  Scenario: Filtering the communication history by recipient or date range\n    Given I am logged in as an administrator\n    When I select \"Eco-Friendly Recycling Center\" from the recipient filter\n    And I click the \"Apply Filter\" button\n    Then I should see only messages sent to \"Eco-Friendly Recycling Center\" in the communication history\n```",
+        "created": 1762429422,
+        "prompt_tokens": 17651,
+        "completion_tokens": 374
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a user, I want to be able to browse through the list of facolities and see which ones are environment-friendly, so that I can know for sure my waste is not going to leave a negative ecological footprint.",
+        "us_id": "g04-recycling_48"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Environmentally Friendly Facility Identification\n\n  Scenario: Displaying an \"Eco-Friendly\" badge on qualified facility listings\n    Given I am browsing the list of recycling facilities\n    When a facility meets certain environmental criteria (e.g., certified sustainable practices, carbon neutral operations)\n    Then the facility listing should display a prominent \"Eco-Friendly\" badge or icon\n\n  Scenario: Providing details on environmental practices for each facility\n    Given I am viewing the details page for \"Eco-Friendly Recycling\"\n    Then the page should include a section outlining the facility's environmental practices\n    And the section should detail specific certifications, sustainable initiatives, and other relevant information\n\n  Scenario: Filtering facilities by environmental certifications\n    Given I am on the recycling facility search page\n    When I select \"Certified Sustainable\" from the filter options\n    Then the search results should only display facilities that have the \"Certified Sustainable\" certification\n\n  Scenario: Providing a scoring system for environmental friendliness\n    Given I am browsing the list of recycling facilities\n    Then each facility listing should display an \"Eco-Score\" or rating based on their environmental practices\n    And the Eco-Score should be clearly visible and understandable\n```",
+        "created": 1762429425,
+        "prompt_tokens": 18074,
+        "completion_tokens": 249
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a recyclingfacility representative, I want to be able to update my information and the type of material I accept, so that I can avoid any miscommunication with users.",
+        "us_id": "g04-recycling_49"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Recycling Facility Self-Management\n\n  Scenario: Recycling facility representative updates their contact information\n    Given I am logged in as a representative of \"Eco-Friendly Recycling Center\"\n    When I navigate to the \"Manage Profile\" page\n    And I update the contact email address to \"newemail@example.com\"\n    And I update the contact phone number to \"555-555-5555\"\n    And I click the \"Save Changes\" button\n    Then I should see a success message indicating that the contact information has been updated\n    And the contact information displayed on the public listing for \"Eco-Friendly Recycling Center\" should reflect the changes\n\n  Scenario: Recycling facility representative updates the types of materials they accept\n    Given I am logged in as a representative of \"Green Solutions Recycling\"\n    When I navigate to the \"Manage Materials\" page\n    And I select \"Cardboard\" as an accepted material\n    And I deselect \"Glass\" as an accepted material\n    And I click the \"Save Changes\" button\n    Then I should see a success message indicating that the accepted materials have been updated\n    And the public listing for \"Green Solutions Recycling\" should now show that they accept \"Cardboard\" but no longer accept \"Glass\"\n\n  Scenario: Recycling facility representative updates their operating hours\n    Given I am logged in as a representative of \"Community Recycling Depot\"\n    When I navigate to the \"Manage Hours\" page\n    And I change the operating hours for Saturday to \"10:00 AM - 2:00 PM\"\n    And I click the \"Save Changes\" button\n    Then I should see a success message indicating that the operating hours have been updated\n    And the public listing for \"Community Recycling Depot\" should now display the updated Saturday operating hours\n\n  Scenario: Recycling facility representative views a preview of their public listing\n    Given I am logged in as a representative of \"All-In-One Recycling\"\n    When I navigate to the \"Preview Listing\" page\n    Then I should see a preview of how my recycling facility's information appears to the public\n    And the preview should reflect any recent changes I have made to my profile, accepted materials, or operating hours\n```",
+        "created": 1762429428,
+        "prompt_tokens": 18360,
+        "completion_tokens": 474
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a recyclingfacility representative, I want to have access to user stats and schedules, so that I can adjust my hours and/or upgrade equipment and capacity in order to be able to accomodate larger amounts of recyclable materials.",
+        "us_id": "g04-recycling_50"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Recycling Facility Data Analytics\n\n  Scenario: Recycling facility representative views user statistics for their facility\n    Given I am logged in as a representative of \"Eco-Friendly Recycling Center\"\n    When I navigate to the \"Analytics Dashboard\"\n    Then I should see the following statistics related to my facility:\n      | Statistic                                    | Description                                                    |\n      | Number of user visits to my facility's page   | Total number of times users have viewed the facility page      |\n      | Average user rating of my facility           | Average rating given by users who have interacted with the facility|\n      | Most common materials users are looking to recycle | Breakdown of the materials users search for when viewing the facility |\n\n  Scenario: Recycling facility representative views user schedule data for their facility\n    Given I am logged in as a representative of \"Green Solutions Recycling\"\n    When I navigate to the \"Schedule Insights\" page\n    Then I should see a graph displaying the busiest and slowest times for user drop-offs at my facility\n    And the graph should allow me to filter by day of the week and time of day\n\n  Scenario: Recycling facility representative downloads raw data for further analysis\n    Given I am logged in as a representative of \"Community Recycling Depot\"\n    When I navigate to the \"Data Export\" page\n    And I select a date range\n    And I click the \"Download Data\" button\n    Then a CSV file containing raw user statistics and schedule data should be downloaded\n\n  Scenario: Recycling facility representative receives automated insights and recommendations\n    Given I am logged in as a representative of \"All-In-One Recycling Facility\"\n    When I navigate to the \"Insights\" page\n    Then I should see automated insights based on user data, such as:\n      | Insight                                                                     | Recommendation                                                              |\n      | \"Users are frequently searching for cardboard recycling but your facility doesn't accept it\" | \"Consider adding cardboard recycling to your accepted materials\"           |\n      | \"Your facility is busiest on Saturdays between 10 AM and 12 PM\"             | \"Consider staffing more employees during peak hours\"                        |\n```",
+        "created": 1762429431,
+        "prompt_tokens": 18882,
+        "completion_tokens": 450
+      }
+    },
+    {
+      "user": {
+        "content": "User story: As a recyclingfacility, I want to be able to communicate directly with the site admin and convey any issues or concerns I have, so that they fix them.",
+        "us_id": "g04-recycling_51"
+      },
+      "assistant": {
+        "content": "```gherkin\nFeature: Recycling Facility Communication with Site Administrators\n\n  Scenario: Recycling facility representative submits a support ticket\n    Given I am logged in as a representative of \"Eco-Friendly Recycling Center\"\n    When I navigate to the \"Support\" page\n    And I enter a subject and a detailed description of my issue\n    And I click the \"Submit Ticket\" button\n    Then I should see a confirmation message indicating that my support ticket has been submitted\n    And the support ticket should be visible in my support ticket history\n\n  Scenario: Recycling facility representative views the status of their support tickets\n    Given I am logged in as a representative of \"Green Solutions Recycling\"\n    When I navigate to the \"Support Ticket History\" page\n    Then I should see a list of all my previously submitted support tickets\n    And each ticket should display its subject, status (e.g., Open, In Progress, Resolved), and date submitted\n\n  Scenario: Recycling facility representative receives a response to their support ticket\n    Given I have submitted a support ticket\n    When a site administrator responds to my support ticket\n    Then I should receive an email notification that my support ticket has been updated\n    And when I view the support ticket, I should see the administrator's response\n\n  Scenario: Recycling facility representative can provide feedback on a resolved support ticket\n    Given I have submitted a support ticket that has been marked as \"Resolved\" by a site administrator\n    When I view the resolved support ticket\n    Then I should have the option to provide feedback on the resolution, such as rating the helpfulness of the administrator's response\n```",
+        "created": 1762429435,
+        "prompt_tokens": 19367,
+        "completion_tokens": 334
+      }
+    }
+  ]
+}
